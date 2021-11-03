@@ -1,0 +1,98 @@
+plugins {
+    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'checkstyle'
+}
+
+checkstyle {
+    toolVersion '8.42';    // your choice here
+}
+
+jar.enabled = false
+
+javafx {
+    version = "15"
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["src/main/java"]
+            includes = ["**/*.fxml"]
+        }
+    }
+}
+
+group = 'hm.edu'
+version = '1.0'
+sourceCompatibility = '16'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation(group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3')
+    implementation(group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3')
+    implementation(group: 'org.openjfx', name: 'javafx', version: '16-ea+1')
+    implementation(group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1')
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+configurations {
+    // configuration that holds jars to include in the jar
+    extraLibs
+}
+
+
+// build chatserver jar file
+task createChatServerJar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': 'hm.edu.dako.chatServer.ChatServerStarter'
+    }
+    archiveBaseName.set('chatServer')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+
+
+// build chatclient jar file
+task createChatClientJar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': 'hm.edu.dako.chatClient.ChatClientStarter'
+    }
+    archiveBaseName.set('chatClient')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+
+// build chatbenchmark jar file
+task createBenchmarkJar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': 'hm.edu.dako.chatBenchmarking.ChatBenchmarkingStarter'
+    }
+    archiveBaseName.set('chatBenchmark')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+
+task build(overwrite: true, dependsOn: [checkstyleMain, createBenchmarkJar, createChatServerJar, createChatClientJar])
