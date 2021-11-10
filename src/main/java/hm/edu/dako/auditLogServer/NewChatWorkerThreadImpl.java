@@ -1,7 +1,8 @@
-package hm.edu.dako.chatServer;
+package hm.edu.dako.auditLogServer;
 
 import hm.edu.dako.chatCommon.ClientConversationStatus;
 import hm.edu.dako.chatCommon.ExceptionHandler;
+import hm.edu.dako.chatServer.*;
 import hm.edu.dako.connection.Connection;
 import hm.edu.dako.connection.ConnectionTimeoutException;
 import hm.edu.dako.connection.EndOfFileException;
@@ -17,8 +18,10 @@ import java.util.Vector;
  * Worker-Thread zugeordnet.
  *
  * @author Peter Mandl
+ * @version neue Version
  */
-public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
+
+public class NewChatWorkerThreadImpl extends AbstractWorkerThread {
 
     private static final Logger log = LogManager.getLogger(SimpleChatWorkerThreadImpl.class);
 
@@ -33,8 +36,8 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
      * @param counter            Referenz auf diverse Zaehler fuer Tests
      * @param serverGuiInterface Referenz auf GUI des Chat-Servers
      */
-    public SimpleChatWorkerThreadImpl(Connection con, SharedChatClientList clients,
-                                      SharedServerCounter counter, ChatServerGuiInterface serverGuiInterface) {
+    public NewChatWorkerThreadImpl(Connection con, SharedChatClientList clients,
+                                   SharedServerCounter counter, ChatServerGuiInterface serverGuiInterface) {
 
         super(con, clients, counter, serverGuiInterface);
         this.auditLogConnection = null;
@@ -52,9 +55,9 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
      * @param serverGuiInterface Referenz auf GUI des Chat-Servers
      * @param auditLogConnection Verbindung zum AuditLog-Server
      */
-    public SimpleChatWorkerThreadImpl(Connection con, SharedChatClientList clients,
-                                      SharedServerCounter counter, ChatServerGuiInterface serverGuiInterface,
-                                      AuditLogConnection auditLogConnection) {
+    public NewChatWorkerThreadImpl(Connection con, SharedChatClientList clients,
+                                   SharedServerCounter counter, ChatServerGuiInterface serverGuiInterface,
+                                   AuditLogConnection auditLogConnection) {
 
         super(con, clients, counter, serverGuiInterface);
 
