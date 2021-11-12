@@ -42,7 +42,7 @@ public class NewChatServerImpl extends AbstractChatServer {
         counter.eventCounter = new AtomicInteger(0);
         counter.confirmCounter = new AtomicInteger(0);
         this.auditLogConnection = null;
-        log.debug("SimpleChatServerImpl konstruiert");
+        log.debug("NewChatServerImpl konstruiert");
     }
 
     /**
@@ -63,7 +63,7 @@ public class NewChatServerImpl extends AbstractChatServer {
         counter.eventCounter = new AtomicInteger(0);
         counter.confirmCounter = new AtomicInteger(0);
         this.auditLogConnection = auditLogConnection;
-        log.debug("SimpleChatServerImpl konstruiert");
+        log.debug("NewChatServerImpl konstruiert");
     }
 
     @Override
@@ -77,7 +77,7 @@ public class NewChatServerImpl extends AbstractChatServer {
                 while (!Thread.currentThread().isInterrupted() && !socket.isClosed()) {
                     try {
                         // Auf ankommende Verbindungsaufbauwuensche warten
-                        System.out.println("SimpleChatServer wartet auf Verbindungsanfragen von Clients...");
+                        System.out.println("NewChatServer wartet auf Verbindungsanfragen von Clients...");
                         Connection connection = socket.accept();
                         log.debug("Neuer Verbindungsaufbauwunsch empfangen");
 
@@ -145,6 +145,6 @@ public class NewChatServerImpl extends AbstractChatServer {
         executorService.shutdown();
         log.debug("Threadpool freigegeben");
 
-        System.out.println("SimpleChatServer beendet sich");
+        System.out.println("NewChatServer beendet sich");
     }
 }
