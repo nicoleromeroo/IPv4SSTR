@@ -6,6 +6,7 @@ import hm.edu.dako.chatClient.SimpleMessageListenerThreadImpl;
 import hm.edu.dako.chatCommon.ExceptionHandler;
 import hm.edu.dako.chatCommon.SystemConstants;
 
+
 /**
  * Verwaltet eine Verbindung zum Server.
  * @author Peter Mandl

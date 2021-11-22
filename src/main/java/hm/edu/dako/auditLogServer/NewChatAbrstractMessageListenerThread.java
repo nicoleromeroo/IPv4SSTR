@@ -16,6 +16,8 @@ abstract class NewChatAbstractMessageListenerThread extends Thread {
     // Kennzeichen zum Beenden der Bearbeitung
     protected boolean finished = false;
 
+
+
     // Verbindung zum Server
     protected Connection connection;
 
