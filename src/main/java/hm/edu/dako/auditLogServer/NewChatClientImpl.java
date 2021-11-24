@@ -33,11 +33,16 @@ public class NewChatClientImpl extends AbstractChatClient {
 
         try {
 
-            if (serverType.equals(SystemConstants.IMPL_TCP_SIMPLE)) {
-                // Simple TCP Server erzeugen, derzeit gibt es nur den einen
+            if (serverType.equals(SystemConstants.IMPL_TCP_ADVANCED)) {
+                // Advanced-TCP-Server erzeugen
+                messageListenerThread = new NewChatMessageListenerThreadImpl(userInterface,
+                        connection, sharedClientData);
+            }
+            else {
                 messageListenerThread = new SimpleMessageListenerThreadImpl(userInterface,
                         connection, sharedClientData);
             }
+
             messageListenerThread.start();
         } catch (Exception e) {
             ExceptionHandler.logException(e);
