@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class NewChatServerImpl extends AbstractChatServer {
-    private static final Logger log = LogManager.getLogger(SimpleChatServerImpl.class);
+    private static final Logger log = LogManager.getLogger(NewChatServerImpl.class);
 
     // Threadpool fuer Worker-Threads
     private ExecutorService executorService;
@@ -42,7 +42,7 @@ public class NewChatServerImpl extends AbstractChatServer {
         counter.eventCounter = new AtomicInteger(0);
         counter.confirmCounter = new AtomicInteger(0);
         this.auditLogConnection = null;
-        log.debug("SimpleChatServerImpl konstruiert");
+        log.debug("NewChatServerImpl konstruiert");
     }
 
     /**
@@ -63,7 +63,7 @@ public class NewChatServerImpl extends AbstractChatServer {
         counter.eventCounter = new AtomicInteger(0);
         counter.confirmCounter = new AtomicInteger(0);
         this.auditLogConnection = auditLogConnection;
-        log.debug("SimpleChatServerImpl konstruiert");
+        log.debug("NewChatServerImpl konstruiert");
     }
 
     @Override
@@ -77,17 +77,17 @@ public class NewChatServerImpl extends AbstractChatServer {
                 while (!Thread.currentThread().isInterrupted() && !socket.isClosed()) {
                     try {
                         // Auf ankommende Verbindungsaufbauwuensche warten
-                        System.out.println("SimpleChatServer wartet auf Verbindungsanfragen von Clients...");
+                        System.out.println("NewChatServer wartet auf Verbindungsanfragen von Clients...");
                         Connection connection = socket.accept();
                         log.debug("Neuer Verbindungsaufbauwunsch empfangen");
 
                         if (auditLogConnection == null) {
                             // Neuen Workerthread starten ohne AuditLog-Verbindung
-                            executorService.submit(new SimpleChatWorkerThreadImpl(connection, clients,
+                            executorService.submit(new NewChatWorkerThreadImpl(connection, clients,
                                     counter, serverGuiInterface));
                         } else {
                             // Wenn der AuditLog-Server verbunden ist, dann jedem WorkerThread die Verbindung zu diesem mitgeben
-                            executorService.submit(new SimpleChatWorkerThreadImpl(connection, clients,
+                            executorService.submit(new NewChatWorkerThreadImpl(connection, clients,
                                     counter, serverGuiInterface, auditLogConnection));
                         }
                     } catch (Exception e) {
@@ -145,6 +145,6 @@ public class NewChatServerImpl extends AbstractChatServer {
         executorService.shutdown();
         log.debug("Threadpool freigegeben");
 
-        System.out.println("SimpleChatServer beendet sich");
+        System.out.println("NewChatServer beendet sich");
     }
 }

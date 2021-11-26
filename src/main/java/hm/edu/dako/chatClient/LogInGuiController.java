@@ -109,6 +109,7 @@ public class LogInGuiController implements Initializable {
                 txtServername.getText());
         try {
             appController.getCommunicator().login(userName);
+            appController.getNewChatCommunicator().login(userName);
         } catch (Exception e2) {
 
             // Benutzer mit dem angegebenen Namen schon angemeldet
@@ -117,6 +118,7 @@ public class LogInGuiController implements Initializable {
                     "Login konnte nicht gesendet werden, vermutlich ist der Server nicht aktiv", 4);
             // Verbindung zum Server wird wieder abgebaut
             appController.getCommunicator().cancelConnection();
+            appController.getNewChatCommunicator().cancelConnection();
         }
     }
 

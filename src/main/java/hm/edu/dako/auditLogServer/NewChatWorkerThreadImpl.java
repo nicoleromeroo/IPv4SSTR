@@ -23,7 +23,7 @@ import java.util.Vector;
 
 public class NewChatWorkerThreadImpl extends AbstractWorkerThread {
 
-    private static final Logger log = LogManager.getLogger(SimpleChatWorkerThreadImpl.class);
+    private static final Logger log = LogManager.getLogger(NewChatWorkerThreadImpl.class);
 
     protected AuditLogConnection auditLogConnection;
     protected boolean auditLogServerEnabled;

@@ -12,11 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 public class NewChatMessageListenerThreadImpl extends AbstractMessageListenerThread {
 
-        private static final Logger log = LogManager.getLogger(hm.edu.dako.chatClient.SimpleMessageListenerThreadImpl.class);
-
-        public void NewChatListenerThreadImpl(ClientUserInterface userInterface,
-                                                    Connection con, SharedClientData sharedData) {
-        }
+        private static final Logger log = LogManager.getLogger(NewChatMessageListenerThreadImpl.class);
 
     public NewChatMessageListenerThreadImpl(ClientUserInterface userInterface, Connection con, SharedClientData sharedData) {
         super(userInterface, con, sharedData);
@@ -161,7 +157,7 @@ public class NewChatMessageListenerThreadImpl extends AbstractMessageListenerThr
 
             ChatPDU receivedPdu = null;
 
-            log.debug("SimpleMessageListenerThread gestartet");
+            log.debug("NewChatMessageListenerThread gestartet");
 
             while (!finished) {
 
@@ -241,16 +237,14 @@ public class NewChatMessageListenerThreadImpl extends AbstractMessageListenerThr
             }
 
             // Verbindung noch schliessen
+            // Verbindung noch schliessen
             try {
                 connection.close();
             } catch (Exception e) {
                 ExceptionHandler.logException(e);
             }
-            log.debug("Ordnungsgemaesses Ende des SimpleMessageListener-Threads fuer User "
+            log.debug("Ordnungsgemaesses Ende des NewChatMessageListener-Threads fuer User "
                     + sharedClientData.userName + ", Status: " + sharedClientData.status);
         } // run
-
-
-
-    }
+}
 

@@ -1,5 +1,6 @@
 package hm.edu.dako.chatClient;
 
+import hm.edu.dako.auditLogServer.NewChatClientImpl;
 import hm.edu.dako.chatCommon.ExceptionHandler;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -28,6 +29,7 @@ public class ClientFxGUI extends Application implements ClientUserInterface {
     private final ClientModel model = new ClientModel();
     private Stage stage;
     private ClientImpl communicator;
+    private NewChatClientImpl newChatCommunicator;
 
     public static void main(String[] args) {
 
@@ -46,12 +48,16 @@ public class ClientFxGUI extends Application implements ClientUserInterface {
      * @param host       Hostname oder IP-Adresse des Servers
      */
     public void createCommunicator(String serverType, int port, String host) {
-
         communicator = new ClientImpl(this, port, host, serverType);
+        newChatCommunicator = new NewChatClientImpl(this, port, host, serverType);
     }
 
     public ClientImpl getCommunicator() {
         return communicator;
+    }
+
+    public NewChatClientImpl getNewChatCommunicator() {
+        return newChatCommunicator;
     }
 
     public ClientModel getModel() {
@@ -95,6 +101,7 @@ public class ClientFxGUI extends Application implements ClientUserInterface {
         stage.setOnCloseRequest(event -> {
             try {
                 getCommunicator().logout(getModel().getUserName());
+                getNewChatCommunicator().logout(getModel().getUserName());
             } catch (IOException e) {
                 e.printStackTrace();
             }

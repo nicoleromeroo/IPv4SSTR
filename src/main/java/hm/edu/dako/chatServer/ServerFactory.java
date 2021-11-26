@@ -1,5 +1,6 @@
 package hm.edu.dako.chatServer;
 
+import hm.edu.dako.auditLogServer.NewChatServerImpl;
 import hm.edu.dako.chatCommon.AuditLogImplementationType;
 import hm.edu.dako.chatCommon.ChatServerImplementationType;
 import hm.edu.dako.chatCommon.LoggingConnectionDecorator;
@@ -56,6 +57,17 @@ public final class ServerFactory {
                 }
 
                 // Weitere Implementierungstypen derzeit nicht implementiert
+
+            case TCPAdvancedImplementation:
+
+                try {
+                    TcpServerSocket tcpServerSocket = new TcpServerSocket(serverPort, sendBufferSize,
+                            receiveBufferSize);
+                    return new NewChatServerImpl(Executors.newCachedThreadPool(),
+                            getDecoratedServerSocket(tcpServerSocket), serverGuiInterface);
+                } catch (Exception e) {
+                    throw new Exception(e);
+                }
 
             default:
                 System.out.println("Dezeit nur TCPSimpleImplementation implementiert!");
@@ -126,6 +138,17 @@ public final class ServerFactory {
                 }
 
                 // Weitere Implementierungstypen derzeit nicht implementiert
+
+            case TCPAdvancedImplementation:
+
+                try {
+                    TcpServerSocket tcpServerSocket = new TcpServerSocket(serverPort, sendBufferSize,
+                            receiveBufferSize);
+                    return new NewChatServerImpl(Executors.newCachedThreadPool(),
+                            getDecoratedServerSocket(tcpServerSocket), serverGuiInterface);
+                } catch (Exception e) {
+                    throw new Exception(e);
+                }
 
             default:
                 System.out.println("Dezeit nur TCPSimpleImplementation implementiert!");
