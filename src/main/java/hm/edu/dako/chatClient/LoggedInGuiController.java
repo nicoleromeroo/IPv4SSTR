@@ -72,7 +72,7 @@ public class LoggedInGuiController {
      */
     public void btnLogOut_OnAction() {
         try {
-            appController.getCommunicator().logout(appController.getModel().getUserName());
+            //appController.getCommunicator().logout(appController.getModel().getUserName());
             appController.getNewChatCommunicator().logout(appController.getModel().getUserName());
         } catch (IOException e) {
             log.error("Logout konnte nicht durchgefuehrt werden, Server aktiv?");
@@ -92,8 +92,8 @@ public class LoggedInGuiController {
     public void btnSubmit_OnAction() {
         try {
             // Eingegebene Chat-Nachricht an Server senden
-            appController.getCommunicator().tell(appController.getModel().getUserName(),
-                    txtChatMessage.getText());
+            //appController.getCommunicator().tell(appController.getModel().getUserName(),
+                    //txtChatMessage.getText());
             appController.getNewChatCommunicator().tell(appController.getModel().getUserName(),
                     txtChatMessage.getText());
             Platform.runLater(new Runnable() {

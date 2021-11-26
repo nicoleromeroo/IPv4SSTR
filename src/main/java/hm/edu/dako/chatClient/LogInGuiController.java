@@ -108,7 +108,7 @@ public class LogInGuiController implements Initializable {
         appController.createCommunicator(comboServerType.getValue(), serverPort,
                 txtServername.getText());
         try {
-            appController.getCommunicator().login(userName);
+            //appController.getCommunicator().login(userName);
             appController.getNewChatCommunicator().login(userName);
         } catch (Exception e2) {
 
@@ -117,7 +117,7 @@ public class LogInGuiController implements Initializable {
             appController.setErrorMessage("Chat-Client",
                     "Login konnte nicht gesendet werden, vermutlich ist der Server nicht aktiv", 4);
             // Verbindung zum Server wird wieder abgebaut
-            appController.getCommunicator().cancelConnection();
+            //appController.getCommunicator().cancelConnection();
             appController.getNewChatCommunicator().cancelConnection();
         }
     }
